@@ -1,0 +1,139 @@
+// Allows you to use I/O functions like print and println
+#use <conio>
+// Allows you to use string functions like string_join
+#use <string>
+// Allows you to use utility functions like abs() and min()
+#use <util>
+
+#use <parse>
+
+
+
+
+/* is_sorted: A[lower,upper) SORTED */
+bool is_sorted(string[] A, int lower, int upper)
+/*@requires 0 <= lower  && lower <= upper && upper <= \length(A); @*/ ;
+
+
+
+bool is_sorted(string[] A, 
+               int lower, 
+               int upper)
+/*@requires 0 <= lower 
+         && lower <= upper 
+         && upper <= \length(A); @*/
+{
+  for(int i = lower; i < upper-1; i++)
+    //@loop_invariant lower <= i;
+    {
+      if(!(string_compare(A[i+1], A[i]) >= 0)) return false;
+    }
+
+  return true;
+}
+
+
+// this helper function is called is_substring function
+bool is_substring(string little, string big) {
+  int len = string_length(little);
+  int offset = string_length(big) - len;
+  while (offset >= 0)
+  //@loop_invariant offset <= string_length(big) - string_length(little);
+  {
+    if (string_equal(little, string_sub(big, offset, offset+len))) return true;
+    offset--;
+  }
+  return false;
+}
+
+
+// this function is used to find the number of commen prefix
+int common_prefix(string s1, string s2)
+//@ensures 0 <= \result && \result <= string_length(s1);
+//@ensures 0 <= \result && \result <= string_length(s2);
+//@ensures string_equal(string_sub(s1, 0, \result), string_sub(s2, 0, \result));
+/*@ensures \result == string_length(s1)
+  @     || \result == string_length(s2)
+  @     || string_charat(s1, \result) != string_charat(s2, \result); @*/
+{
+  if (string_equal(s1, "") && string_equal(s2, "")) {
+    return 0;
+  } else if (string_equal(s1, "") || string_equal(s2, "")) {
+    return 0;
+  } else {
+    int counter = 0;
+    int len_of_s1 = string_length(s1);
+    int len_of_s2 = string_length(s2);
+    int valid_len_index = min(len_of_s1, len_of_s2);
+    for (int i = 0; i < valid_len_index; i++) {
+      if (string_equal(string_sub(s1, 0, i+1), string_sub(s2, 0, i+1))) {
+        counter++;
+      }
+    }
+    return counter;
+  }
+}
+
+
+// this function is used to find the first nonrepeating position
+int find_nonrepeating_position(string s)
+//@requires string_length(s) > 0;
+//@requires string_charat(s, 0) != string_charat(s, string_length(s) - 1);
+//@ensures 0 <= \result && \result < string_length(s)-1;
+//@ensures string_charat(s, \result) == string_charat(s, 0);
+//@ensures string_charat(s, \result+1) != string_charat(s, 0);
+{
+  if (string_length(s) == 2) {
+    return 0;
+  }
+  int valid_len_index = string_length(s);
+  for (int i = 0; i < valid_len_index - 1; i++) {
+    if (string_charat(s, i + 1) != string_charat(s, 0)) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+
+// this function is called same_start_end used to return sub string that has same start and end
+string same_start_end(string s)
+//@ensures is_substring(\result, s); //result is a sub string of s
+/*@ensures string_length(s) < 128  // len of s is less than 128 or len of result bigger than 1 and
+  @     || (string_length(\result) > 1
+  @         && string_charat(\result, 0)
+  @            == string_charat(\result, string_length(\result) - 1)); @*/
+{
+  int len_of_s = string_length(s);
+  for (int i = 0; i < len_of_s; i++){
+    for (int j = i + 1; j < len_of_s; j++){
+      if (is_substring(string_sub(s, i, j), s)){
+        if (string_charat(s, i) == string_charat(s, j)) {
+          return string_sub(s, i, j + 1);
+        }
+      }
+    }
+  }
+  return "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

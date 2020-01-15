@@ -1,0 +1,3 @@
+20181115-144450.881: t=140f: Info: extension.bridge(19270): Attempting to attach shared connection (ACCFinderBridge.mm.-[ACCFinderBridge2 setupCommunication].205)
+20181115-144451.348: t=140f: Info: extension.bridge(19270): intialization succsessfull (ACCFinderBridge.mm.-[ACCFinderBridge2 init].151)
+20181115-144451.427: t=140f: Info: extension.findersync(19270): init. compiled: Oct 25 2016 09:09:13 (ACCFinderSync.mm.-[ACCFinderSync initWithOverriddenController:].53)

@@ -1,0 +1,3 @@
+[0817/162613:WARNING:ipc_message_attachment_set.cc(57)] MessageAttachmentSet destroyed with unconsumed descriptors: 0/1
+[0817/162836:ERROR:mach_port_broker.mm(43)] bootstrap_look_up: Unknown service name (1102)
+[1115/144459:WARNING:ipc_message_attachment_set.cc(57)] MessageAttachmentSet destroyed with unconsumed descriptors: 0/1

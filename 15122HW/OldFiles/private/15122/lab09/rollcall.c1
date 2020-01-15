@@ -1,0 +1,60 @@
+#use <util>
+#use <conio>
+#use <string>
+
+typedef struct student_info student;
+
+struct student_info {
+	string andrew_id;
+	int days_present;
+	int days_absent;
+};
+
+
+int hash_string(string s) {
+  int h = 0;
+  for (int i = 0; i < string_length(s); i++) {
+    h = h + char_ord(string_charat(s, i));
+    h = 1664525 * h + 1013904223;
+  }
+  return h;
+}
+
+int hash_student(key x)
+//@requires x != NULL;
+//@requires \hastag(string*, x);
+{
+  string* s = (string*)x;
+  return hash_string(*s);
+}
+
+bool students_same_andrewid(key x, key y)
+//@requires x != NULL && y != NULL;
+//@ensures \hastag(string*, x) && \hastag(string*, y);
+{
+  string* s1 = (string*)x;
+  string* s2 = (string*)y;
+  return hash_string(*s1) == hash_string(*s2);
+}
+
+
+hdict_t new_roster(string[] andrew_ids, int len)
+//@requires \length(andrew_ids) == len;
+{
+  hdict_t H = hdict_new(len, &students_same_andrewid, &hash_student);
+  for (int i = 0; i < len; i++) {
+    student* s = alloc(student);
+    s->andrew_id = andrew_ids[i];
+    string* k = alloc(string);
+    *k = s->andrew_id;
+    s->days_present = 0;
+    hdict_insert(H, (void*)k, (void*)s);
+  }
+  return H;
+}
+
+
+int main(){
+  return 0;
+}
+

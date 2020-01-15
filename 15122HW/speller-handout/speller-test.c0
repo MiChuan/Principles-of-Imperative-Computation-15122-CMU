@@ -1,0 +1,39 @@
+#use <string>
+#use <parse>
+
+int main() {
+
+  int d = 20;
+  string s1 = "abashing algae are avoid bad beck beclaw biliate em energy ";
+  string s2 = "eo ep movies mow sloth zig zygote zzz zzzz zzzzz";
+  string target = string_join(s1, s2);
+  string[] dict = parse_tokens(target);
+
+  assert(check_word(dict, d, "sloth") == true);
+  assert(check_word(dict, d, "sloathe") == false);
+  assert(check_word(dict, d, "abashing") == true);
+  assert(check_word(dict, d, "avoid") == true);
+  assert(check_word(dict, d, "zzzzzzzzzzz") == false);
+  assert(check_word(dict, d, "idlleness") == false);
+  assert(check_word(dict, d, "energie") == false);
+  assert(check_word(dict, d, "algee") == false);
+  assert(check_word(dict, d, "zygote") == true);
+  assert(check_word(dict, d, "zymurgy") == false);
+  assert(check_word(dict, d, "zig") == true);
+  assert(check_word(dict, d, "mow") == true);
+  assert(check_word(dict, d, "movies") == true);
+
+  
+  string[] text = parse_tokens("abashing are bad guys and you are good guys");
+  int t = 9;
+  string[] miss = alloc_array(string, t);
+  int num_of_miss = check_text_better(dict, d, text, t, miss);
+  assert(num_of_miss == 4 && 
+    string_equal(miss[0], "and") &&
+    string_equal(miss[1], "good") &&
+    string_equal(miss[2], "guys") && string_equal(miss[3], "you"));
+   
+  
+
+  return 0;
+}

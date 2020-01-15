@@ -1,0 +1,66 @@
+[ 1565204219.899095]: IMSettings-Daemon[1556]: INFO: Starting imsettings-daemon...
+[ 1565204219.903680]: IMSettings-Daemon[1556]: INFO:   [HOME=/afs/andrew.cmu.edu/usr6/mxu2/.config/imsettings]
+[ 1565204219.904462]: IMSettings-Daemon[1556]: INFO:   [XINPUTRCDIR=/etc/X11/xinit/]
+[ 1565204219.905369]: IMSettings-Daemon[1556]: INFO:   [XINPUTDIR=/etc/X11/xinit/xinput.d/]
+
+[ 1565204219.906558]: IMSettings-Daemon[1556]: INFO:   [MODULEDIR=/usr/lib64/imsettings]
+
+[ 1565204219.907321]: IMSettings-Daemon[1556]: INFO:   [MODULES=gsettings, qt]
+
+
+[ 1565204219.909448]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+
+[ 1565204219.923830]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+
+[ 1565204219.945062]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+
+[ 1565204219.959583]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+imsettings information
+==========================
+XINPUTRC: /etc/X11/xinit/xinput.d//none.conf
+	  File: ‘/etc/X11/xinit/xinput.d//none.conf’
+	  Size: 110       	Blocks: 8          IO Block: 4096   regular file
+	Device: 802h/2050d	Inode: 2471890     Links: 1
+	Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+	Access: 2019-08-07 14:56:59.585623383 -0400
+	Modify: 2018-06-21 02:22:39.000000000 -0400
+	Change: 2018-12-11 18:24:12.334603746 -0500
+	 Birth: -
+Is DBus enabled: yes
+Is imsettings enabled: yes
+Is GTK+ supported: 
+[ 1565204220.053977]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+
+[ 1565204220.069994]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+no
+Is Qt supported: 
+[ 1565204220.093036]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+
+[ 1565204220.108743]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+yes
+DESKTOP: xfce
+GUESS_DESKTOP: $GDMSESSION
+DISABLE_IMSETTINGS: 
+IMSETTINGS_DISABLE_DESKTOP_CHECK: 
+DBUS_SESSION_BUS_ADDRESS: unix:abstract=/tmp/dbus-L2qhExbtPu,guid=4e2a9be22130ea783cb2b9995d4b1efb
+GTK_IM_MODULE: gtk-im-context-simple
+QT_IM_MODULE: xim
+XMODIFIERS: @im=none
+IMSETTINGS_MODULE: none
+IMSETTINGS_INTEGRATE_DESKTOP: yes
+
+
+[ 1565204224.319110]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+[ 1565204224.368107]: IMSettings-Daemon[1556]: INFO: Attempting to switch IM to none [lang=en_US.UTF-8, update=false]
+[ 1565204224.453644]: IMSettings-Daemon[1556]: INFO:   no need to invoke any auxiliary process for none
+[ 1565204224.454871]: IMSettings-Daemon[1556]: INFO:   no need to invoke any main process for none
+
+[ 1565204224.455967]: IMSettings-Qt backend[1556]: WARNING **: Unable to read the Qt config file: No such file or directory
+[ 1565204224.457116]: IMSettings-GSettings backend[1556]: INFO: Setting up gtk-im-context-simple:xim as gtk+ immodule
+[ 1565205649.854129]: IMSettings-Daemon[1556]: INFO: Release the ownership of com.redhat.imsettings
+
+
+[ 1565205649.858098]: GLib-GIO[1556]: CRITICAL **: Error while sending AddMatch() message: The connection is closed
+
+[ 1565205649.859465]: GLib-GIO[1556]: CRITICAL **: Error while sending AddMatch() message: The connection is closed
+[ 1565205649.861284]: IMSettings-Daemon[1556]: INFO: Unloading imesttings module: qt

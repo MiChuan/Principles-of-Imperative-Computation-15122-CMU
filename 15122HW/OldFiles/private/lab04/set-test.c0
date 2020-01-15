@@ -1,0 +1,46 @@
+#use <conio>
+
+
+bool test_one(int[] A, int a, int[] B, int b, int[] solution, int s)
+//@requires 0 <= a && a <= \length(A);
+//@requires 0 <= b && b <= \length(B);
+//@requires 0 <= s && s <= \length(solution);
+{
+    int size = 0; //How big should this be?
+    if (a >= b) {
+    	size = b;
+    } else if ( a < b){
+    	size = a;
+    }
+    int[] intersection = alloc_array(int, size);
+    int len = intersect(A, a, B, b, intersection);
+    //Check to make sure the result is correct
+    if (len != s) return false;
+    if (arr_eq(solution, s, intersection, len) == false) return false;
+    if (contains_no_dupes(intersection, len) == false) return false;
+    if (is_sorted(intersection, len) == false) return false;
+    //No Checks failed so it is correct!
+    return true;
+}
+
+bool run_tests() {
+	int[] A = int_array_from_string("5, 4, 3, 2, 1");
+	int[] B = int_array_from_string("3, 2, 1");
+	int [] solution = int_array_from_string("3, 2, 1");
+	assert(test_one(A, 5, B, 3, solution, 3));
+	//println("Passed!")
+
+	int[] C = int_array_from_string("54, 3, 2, 1");
+	int[] D = int_array_from_string("1");
+	int [] solution1 = int_array_from_string("1");
+	assert(test_one(C, 4, D, 1, solution1, 1));
+	//println("Passed!")
+	//if (assert(test_one(A, 5, B, 3, solution, 3)) && assert(test_one(C, 4, D, 1, solution1, 1))) return true;
+
+
+    //Remember - this function should return whether
+    //ALL tests pass!
+
+
+    return true; //No tests, so they all fail right?
+}

@@ -1,0 +1,82 @@
+int main()
+{
+  //tests for rope_new()
+  rope_t r = rope_new("hello");
+  rope_t r1 = rope_new("hello1");
+
+  //tests for is_rope
+  assert(is_rope(NULL));
+  assert(is_rope(r));
+  r->right = rope_new("world");
+  assert(!is_rope(r));
+  r->right = NULL;
+  assert(is_rope(r));
+
+  //tests for rope_length()
+  assert(rope_length(NULL) == 0);
+  assert(rope_length(r) == 5);
+  assert(rope_length(rope_join(NULL, NULL)) == 0);
+  assert(rope_join(NULL, NULL) == NULL);
+  assert(rope_join(r1, NULL) == r1);
+
+  //tests for rope_join()
+  assert(rope_length(rope_join(r, r)) == 10);
+
+  // tests for rope_charat()
+  r = rope_join(r, r);
+  assert(rope_charat(r, 0) == 'h');
+  assert(rope_charat(r, 5) == 'h');
+
+  // tests for rope_tostring()
+  assert(string_equal(rope_tostring(r), "hellohello"));
+
+  // tests for rope_sub()
+  assert(rope_sub(NULL, 0, 0) == NULL);
+  assert(string_equal(rope_tostring(rope_sub(r, 0, 5)), "hello"));
+  assert(string_equal(rope_tostring(rope_sub(r, 5, 10)), "hello"));
+  assert(string_equal(rope_tostring(rope_sub(r, 0, 10)), "hellohello"));
+  rope_t r2 = rope_new("t");
+  rope_t r3 = rope_new("otally");
+  rope_t r4 = rope_join(r2, r3);
+  rope_t r5 = rope_new("efficien");
+  rope_t r6 = rope_new("t");
+  rope_t r7 = rope_join(r5, r6);
+  rope_t r8 = rope_join(r4, r7);
+  rope_t r9 =  rope_new("effi");
+  assert(string_equal(rope_tostring(rope_sub(r8, 0, 16)), "totallyefficient"));
+  println(rope_sub(r8, 1, 11)->left->data);
+  println(rope_sub(r8, 1, 11)->right->data);
+
+ 
+  
+  /*
+  // tests for rope_reduce()
+  rope_t[] ropes = alloc_array(rope_t, 3);
+
+  ropes[0] = rope_new("hello");
+  ropes[1] = rope_new("hello");
+  ropes[2] = rope_join(ropes[0], ropes[1]);
+  assert(is_rope(ropes[2]));
+  assert(ropes[2]->left != ropes[2]->right);
+  rope_reduce(ropes, 3);
+  assert(ropes[2]->left == ropes[2]->right);
+
+  ropes = alloc_array(rope_t, 4);
+  ropes[0] = rope_join(rope_new("ab"), rope_new("ra"));
+  ropes[1] = rope_join(rope_new("cad"), rope_new("ab"));
+  ropes[2] = rope_join(ropes[1], rope_new("ra"));
+  ropes[3] = rope_join(ropes[0], ropes[2]);
+  rope_reduce(ropes, 4);
+  assert(ropes[3]->left->left == ropes[3]->right->left->right);
+  assert(ropes[3]->left->right == ropes[3]->right->right);
+
+  ropes[0] = rope_join(rope_new("abr"), rope_new("a"));
+  ropes[1] = rope_join(rope_new("ab"), rope_new("ra"));
+  ropes[2] = rope_join(rope_new("cad"), ropes[1]);
+  ropes[3] = rope_join(ropes[0], ropes[2]);
+  rope_reduce(ropes, 4);
+  assert(ropes[3]->left == ropes[3]->right->right);
+  */
+
+  return 0;
+}

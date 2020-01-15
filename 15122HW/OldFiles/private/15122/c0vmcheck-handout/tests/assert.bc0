@@ -1,0 +1,48 @@
+C0 C0 FF EE       # magic number
+00 13             # version 9, arch = 1 (64 bits)
+
+00 00             # int pool count
+# int pool
+
+00 50             # string pool total size
+# string pool
+74 65 73 74 73 2F 61 73 73 65 72 74 2E 63 30 3A 34 2E 33 2D 34 2E 31 38 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/assert.c0:4.3-4.18: assert failed"
+74 65 73 74 73 2F 61 73 73 65 72 74 2E 63 30 3A 35 2E 33 2D 35 2E 31 38 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/assert.c0:5.3-5.18: assert failed"
+
+00 01             # function count
+# function_pool
+
+#<main>
+00 00             # number of arguments = 0
+00 00             # number of local variables = 0
+00 2D             # code length = 45 bytes
+10 01    # bipush 1        # 1
+10 01    # bipush 1        # 1
+9F 00 06 # if_cmpeq +6     # if (1 == 1) goto <00:cond_true>
+A7 00 08 # goto +8         # goto <01:cond_false>
+# <00:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <02:cond_end>
+# <01:cond_false>
+10 00    # bipush 0        # false
+# <02:cond_end>
+14 00 00 # aldc 0          # s[0] = "tests/assert.c0:4.3-4.18: assert failed"
+CF       # assert          # assert(1 == 1) [failure message on stack]
+10 02    # bipush 2        # 2
+10 01    # bipush 1        # 1
+A0 00 06 # if_cmpne +6     # if (2 != 1) goto <03:cond_true>
+A7 00 08 # goto +8         # goto <04:cond_false>
+# <03:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <05:cond_end>
+# <04:cond_false>
+10 00    # bipush 0        # false
+# <05:cond_end>
+14 00 28 # aldc 40         # s[40] = "tests/assert.c0:5.3-5.18: assert failed"
+CF       # assert          # assert(2 != 1) [failure message on stack]
+10 00    # bipush 0        # 0
+B0       # return          # 
+
+00 00             # native count
+# native pool
+

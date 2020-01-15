@@ -1,0 +1,43 @@
+Fri Aug 17 2018 16:28:33 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > Loading Vulcan Library...
+Fri Aug 17 2018 16:28:34 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > Vulcan Library Successfully Loaded.
+Fri Aug 17 2018 16:28:34 GMT-0400 (EDT) CCXWelcome > IMS > Loading IMS Library...
+Fri Aug 17 2018 16:28:34 GMT-0400 (EDT) CCXWelcome > IMS > IMS Library Successfully Loaded.
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > FileUtils > lockfile:/afs/andrew.cmu.edu/usr6/mxu2/Library/Caches/Adobe/CCX Welcome/.lockfile
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) Get lock file successfully.
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > Proxy > Got 186 certificates
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) -------------------------Startup------------------------------
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) Build version is 1.5.0-323
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > CardLookupMap > Failed to load lookup file from disk: Error: ENOENT: no such file or directory, open '/afs/andrew.cmu.edu/usr6/mxu2/Library/Caches/Adobe/CCX Welcome/data/map.json'
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > StockTemplateLookupMap > Failed to load lookup file from disk: Error: ENOENT: no such file or directory, open '/afs/andrew.cmu.edu/usr6/mxu2/Library/Caches/Adobe/CCX Welcome/stock/map.json'
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > -> BROADCAST: ccxprocess.Initialized
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > IMS > Error fetching default user: IMSError: [DEFAULT_USER_FOR_CLIENTID_NOT_PRESENT] Error returned if there is no default user for client_id
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > -> ADCS *: accc.app.ProxySettingsRequest
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > -> ADCS *: accc.notifications
+Fri Aug 17 2018 16:28:35 GMT-0400 (EDT) CCXWelcome > VulcanWrapper > -> ADCS *: accc.notifications
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > ThorNotifications > GetProxySettings - Error: timed out getting proxy settings from Thor
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > Proxy > Setting proxy username and password
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > CardLookupMap > GC starts.
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > StockTemplateLookupMap > GC starts.
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > CardLookupMap > GC ended successfully.
+Fri Aug 17 2018 16:28:37 GMT-0400 (EDT) CCXWelcome > StockTemplateLookupMap > GC ended successfully.
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) CCXWelcome > VulcanWrapper > Loading Vulcan Library...
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) CCXWelcome > VulcanWrapper > Vulcan Library Successfully Loaded.
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) CCXWelcome > IMS > Loading IMS Library...
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) CCXWelcome > IMS > IMS Library Successfully Loaded.
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) CCXWelcome > FileUtils > lockfile:/afs/andrew.cmu.edu/usr6/mxu2/Library/Caches/Adobe/CCX Welcome/.lockfile
+Thu Nov 15 2018 14:45:08 GMT-0500 (EST) Get lock file successfully.
+Thu Nov 15 2018 14:45:09 GMT-0500 (EST) CCXWelcome > Proxy > Got 186 certificates
+Thu Nov 15 2018 14:45:09 GMT-0500 (EST) -------------------------Startup------------------------------
+Thu Nov 15 2018 14:45:09 GMT-0500 (EST) Build version is 1.5.0-323
+Thu Nov 15 2018 14:45:09 GMT-0500 (EST) CCXWelcome > VulcanWrapper > -> BROADCAST: ccxprocess.Initialized
+Thu Nov 15 2018 14:45:09 GMT-0500 (EST) CCXWelcome > IMS > Error fetching default user: IMSError: [DEFAULT_USER_FOR_CLIENTID_NOT_PRESENT] Error returned if there is no default user for client_id
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > VulcanWrapper > -> ADCS *: accc.app.ProxySettingsRequest
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > VulcanWrapper > -> ADCS *: accc.notifications
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > VulcanWrapper > -> ADCS *: accc.notifications
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > VulcanWrapper > <- ADCS 4.0.0: accc.app.ProxySettingsResponse
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > ThorNotifications > GetProxySettings - Successfully obtained username/password from Thor
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > Proxy > Setting proxy username and password
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > CardLookupMap > GC starts.
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > StockTemplateLookupMap > GC starts.
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > CardLookupMap > GC ended successfully.
+Thu Nov 15 2018 14:45:10 GMT-0500 (EST) CCXWelcome > StockTemplateLookupMap > GC ended successfully.

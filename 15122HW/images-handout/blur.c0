@@ -1,0 +1,91 @@
+/* Assumes that pixel is already defined to be an int (pixel.c0) */
+/* typedef int pixel; */
+#use <util>
+//RETURNS: check whether the mask is vaild or not
+bool check_for_valid_mask(int[] mask, int maskwidth)
+{
+  int mid_index = (maskwidth * maskwidth) / 2;
+  for (int i = 0; i < maskwidth * maskwidth; i++) 
+  {
+    if (mask[i] < 0) return false;
+    if (i == mid_index) 
+    {
+      if (mask[i] == 0) return false;
+    }
+  }
+  return true;
+}
+
+// RETURNS: whether the calculated postion is valid or not
+bool is_valid_position(int row, int col, int width, int height)
+//@requires is_valid_imagesize(width, height);
+{
+  return
+    (0 <= row) && (row < height) &&
+    (0 <= col) && (col < width);
+}
+
+// RETURNS: a pixel_t value and this is the 
+//helper function for blur main function
+int apply_blur(int index, pixel_t[] pixels, int width,
+ int height, int[] mask, int maskwidth)
+{
+  int row = get_row(index, width, height); 
+  int col = get_column(index, width, height); 
+  int red_value = 0;
+  int green_value = 0;
+  int blue_value = 0;
+  int counter = 0;
+  int left_of_mask = col - maskwidth / 2;
+  int top_of_mask = row - maskwidth / 2;
+  for (int i = 0; i < maskwidth; i++)
+  //@loop_invariant 0 <= i;
+  {
+    for (int j = 0; j < maskwidth; j++)
+    //@loop_invariant 0 <= j;
+    {
+      int real_row_of_mask = top_of_mask + i;
+      int real_col_of_mask = left_of_mask + j;
+      if (is_valid_position(real_row_of_mask, real_col_of_mask, width, height))
+      {
+        int mask_index = get_index(i, j, maskwidth, maskwidth);
+        int image_index = get_index(real_row_of_mask,
+                                    real_col_of_mask, width, height);
+        pixel_t p = pixels[image_index];
+        int tmp_red_value = get_red(p);
+        int tmp_green_value = get_green(p);
+        int tmp_blue_value = get_blue(p);
+        red_value = red_value + (mask[mask_index] * tmp_red_value);
+        green_value = green_value + (mask[mask_index] * tmp_green_value);
+        blue_value = blue_value + (mask[mask_index] * tmp_blue_value);
+        counter = counter + mask[mask_index];
+      }
+    }
+  }
+  int target_red = red_value / counter;
+  int target_green = green_value / counter;
+  int target_blue = blue_value / counter;
+  int target_alpha = get_alpha(pixels[index]);
+  return make_pixel(target_alpha, target_red, target_green, target_blue);
+}
+
+// this is the blur main function that returns the blurred_image
+pixel_t[] blur(pixel_t[] pixels, int width, int height,
+ int[] mask, int maskwidth)
+//@requires \length(mask) == maskwidth * maskwidth;
+//@requires check_for_valid_mask(mask, maskwidth);
+//@requires (1 <= maskwidth) && (maskwidth % 2 == 1);
+//@requires is_valid_imagesize(width, height);
+//@requires \length(pixels) == width * height;
+//@requires is_valid_imagesize(maskwidth, maskwidth); 
+//@requires mask[(maskwidth * maskwidth) / 2] != 0;
+//@ensures \length(\result) == \length(pixels);
+
+{
+  pixel_t[] blurred_image = alloc_array(pixel_t, width * height);
+  for (int i = 0; i < width * height; i++) {
+    blurred_image[i] = apply_blur(i, pixels, width, height, mask, maskwidth);
+  }
+  return blurred_image;
+}
+

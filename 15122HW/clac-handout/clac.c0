@@ -1,0 +1,282 @@
+/*
+ * Clac, stack-based calculator language
+ *
+ * 15-122 Principles of Imperative Computation
+ */
+
+#use <string>
+#use <parse>
+#use <conio>
+#use <args>
+#use <util>
+
+/* From the perspective of the clac-main.c0 file, state_t is an
+ * abstract type. (typedef ____* state_t) This file contains the
+ * implementation of the state_t type. You will add new fields to this
+ * struct when you do task 4. */
+struct state_header {
+  /* Nothing in here initially */
+  qstack_t return_stack;
+  dict_t definitions;
+};
+typedef struct state_header* state_t;
+state_t init_state()
+//@ensures \result != NULL;
+{
+  state_t state =  alloc(struct state_header);
+  state->return_stack = qstack_new();
+  state->definitions = dict_new();
+  return state;
+}
+
+//check whether S is empty and pop the top element from S
+int safe_pop(stack_t S)
+//@requires S != NULL;
+{
+  if(stack_empty(S)) {
+    error("pop empty stack");
+  }
+  return pop(S);
+}
+
+//check whether Q is empty and deq the first element from Q
+string safe_deq(queue_t Q)
+//@requires Q != NULL;
+{
+  if(queue_empty(Q)) {
+    error("deq empty queue");
+  }
+  return deq(Q);
+}
+
+
+// Computation of x to the power of y
+int POW(int x, int y)
+//@requires y >= 0;
+{
+   int accum = 1;
+   int b = x;    
+   int e = y;    
+   while (e > 0)
+   //@loop_invariant e >= 0; 
+   {
+     if (e % 2 == 1) accum = b * accum;
+     b = b * b;
+     e = e / 2;
+   }
+   //@assert e == 0;
+   return accum;
+}
+
+
+// swap the two top elements of S if exists x and y
+void swap(int x, int y, stack_t S)
+//@requires S != NULL;
+{
+  push(S, y);
+  push(S, x);
+}
+
+// rotate the top three elements of S if exists z, y and x
+void rot(stack_t S)
+//@requires S != NULL;
+{
+  int z = safe_pop(S);
+  int y = safe_pop(S);
+  int x = safe_pop(S);
+  push(S, y);
+  push(S, z);
+  push(S, x);
+}
+
+// helper function for IF
+void IF(stack_t S, queue_t Q)
+//@requires S != NULL;
+//@requires Q != NULL;
+{
+  int x = safe_pop(S);
+  if (x == 0) {
+    safe_deq(Q);
+    safe_deq(Q);
+    safe_deq(Q);
+  }
+}
+
+
+// return the nth element of S(counted from top to down, start from 1) 
+int PICK(stack_t S, int n)
+//@requires S != NULL;
+{
+  if (n <= 0) {
+    error("pick element with non-positive counter");
+  }
+  //@assert n >= 1;
+  stack_t S_tmp = stack_new();
+  for (int i = 0; i < n; i++) 
+  //@loop_invariant 0 <= i && i <= n;
+  {
+    push(S_tmp, safe_pop(S));
+  }
+  int x_n = safe_pop(S_tmp);
+  push(S_tmp, x_n);
+  for (int i = 0; i < n; i++)
+  //@loop_invariant 0 <= i && i <= n;
+  {
+    push(S, safe_pop(S_tmp));
+  }
+  return x_n;
+}
+
+//skip from 1 to nth tokens in Q
+void SKIP(queue_t Q, int n)
+//@requires Q != NULL;
+{
+  if (n < 0) {
+    error("skip negative number of tokens");
+  }
+  //@assert n >= 0;
+  for (int i = 0; i < n; i++) {
+    safe_deq(Q);
+  }
+}
+
+
+// return true iff x is a defined in ST
+bool is_defined_in_dict(string x, state_t ST)
+//@requires ST != NULL;
+{
+  return dict_lookup(ST->definitions, x) != NULL;
+}
+
+
+//given the input queue, then read the body of a definition
+// from Q then return body of a definition
+queue_t get_definition(queue_t Q)
+//@requires Q != NULL;
+//@ensures \result != NULL;
+{
+  string tok = safe_deq(Q);
+  queue_t q_new = queue_new();
+  while(!string_equal(tok, ";")) {
+    enq(q_new, tok);
+    tok = safe_deq(Q);
+  }
+  return q_new;
+}
+
+
+/* Main clac interpreter. */
+/* Return true: clac top-level interpreter will expect more input */
+/* Return false: clac top-level interpreter will exit */
+bool eval(queue_t Q2, stack_t S, state_t ST)
+//@requires Q2 != NULL && S != NULL && ST != NULL;
+//@ensures \result == false || queue_empty(Q2);
+{
+  queue_t Q = Q2;
+  while (!queue_empty(Q) ) {
+    string tok = safe_deq(Q); /* Is this dequeue safe? */
+    // Uncommenting these lines might help with debugging:
+    // print("Read: "); print(tok); print("\n");
+    if (string_equal(tok, "print")) {
+      int x = safe_pop(S); /* This line is unsafe and must be fixed! */
+      printint(x); print("\n");
+    } else if (string_equal(tok, "quit")) {
+      return false;
+    } else if (string_equal(tok, "+")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      push(S, x + y);
+    } else if (string_equal(tok, "-")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      push(S, x - y);
+    } else if (string_equal(tok, "*")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      push(S, x * y);
+    } else if (string_equal(tok, "/")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      if(y == 0) {
+        error("division by 0");
+      }
+      if((x == int_min()) && (y == -1)) {
+        error("division of int_min() by -1");
+      }
+      push(S, x / y);
+    } else if (string_equal(tok, "**")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      if (0 <= y) {
+        push(S, POW(x, y));
+        } else {
+          error("Cannot Computate POW with negative exponents"); 
+        }   
+    } else if (string_equal(tok, "%")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      if(y == 0) {
+        error("modulus by 0");
+      }
+      if((x == int_min()) && (y == -1)) {
+        error("modulus of int_min() by -1");
+      }
+      push(S, x % y);
+    } else if (string_equal(tok, "<")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      if (x < y) {
+        push(S, 1);
+      } else {
+        push(S, 0);
+      }
+    } else if (string_equal(tok, "drop")) {
+      safe_pop(S);
+    } else if (string_equal(tok, "swap")) {
+      int y = safe_pop(S);
+      int x = safe_pop(S);
+      swap(x, y, S);
+    } else if (string_equal(tok, "rot")) {
+      rot(S);
+    } else if (string_equal(tok, "if")) {
+      IF(S, Q);
+    } else if (string_equal(tok, "pick")) {
+      int n = safe_pop(S);
+      int x_n = PICK(S, n);
+      push(S, x_n);
+    } else if (string_equal(tok, "skip")) {
+      int n = safe_pop(S);
+      SKIP(Q, n);
+    } else if (string_equal(tok, ":")) {
+      string name = safe_deq(Q);
+      queue_t def = get_definition(Q);
+      dict_insert(ST->definitions, name, def);
+    } else if (is_defined_in_dict(tok, ST)) {
+      queue_t def = dict_lookup(ST->definitions, tok);
+      def = queue_read_only_copy(def);
+      if (!queue_empty(Q)) {
+        qpush(ST->return_stack, Q);
+      }
+      Q = def;
+    } else {
+      /* Not defined as an operation name, should be an int */
+      int* p = parse_int(tok, 10);
+      if (p == NULL) { /* not an int */
+        /* call error(msg) which prints msg and aborts */
+        error(string_join("undefined token ", tok));
+      }
+      push(S, *p);
+    }
+
+    if (queue_empty(Q) && !qstack_empty(ST->return_stack)) {
+       Q = qpop(ST->return_stack);
+    }
+    
+  }
+
+  /* When you return "true", don't pop anything off the stack! When we
+   * grade your function, we'll check that the stack contains the
+   * integers we expect. */
+  return true;
+}
+

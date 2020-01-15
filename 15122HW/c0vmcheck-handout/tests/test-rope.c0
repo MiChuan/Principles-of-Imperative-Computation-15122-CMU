@@ -1,0 +1,289 @@
+/*
+ * Ropes
+ *
+ * 15-122 Principles of Imperative Computation
+ */
+
+#use <conio>
+#use <string>
+#use <util>
+
+/***********************************/
+/* Implementation (edit this part) */
+/***********************************/
+
+typedef struct rope_node rope;
+struct rope_node {
+  int len;
+  rope* left;
+  rope* right;
+  string data;
+};
+
+/* Include your code between HERE ... */
+// helper function is_leaf_node for is_rope
+bool is_leaf_node(rope* R)
+{
+  return R != NULL &&
+         string_length(R->data) != 0 &&
+         R->left == NULL && 
+         R->right == NULL &&
+         R->len > 0 &&
+         R->len == string_length(R->data);
+}
+
+// is_rope main function 
+bool is_rope(rope* R)
+{
+  return  (R == NULL ||
+          is_leaf_node(R) ||
+          // check whether the node is concatenation_node
+          (R != NULL &&
+          R->left != NULL && 
+          R->right != NULL && 
+          R->len == R->left->len + R->right->len &&
+          R->len > R->left->len &&
+          R->len > R->right->len &&
+          is_rope(R->left) &&
+          is_rope(R->right)));
+}
+
+// check whether it is concatenation_node
+bool is_concatenation_node(rope* R)
+{
+  return R != NULL &&
+         R->left != NULL && 
+         R->right != NULL && 
+         R->len == R->left->len + R->right->len &&
+         R->len > R->left->len &&
+         R->len > R->right->len &&
+         is_rope(R->left) &&
+         is_rope(R->right);
+}
+
+//return the length of rope 
+int rope_length(rope* R)
+//@requires is_rope(R);
+//@ensures \result >= 0;
+{
+  if (R == NULL) return 0;
+  return R->len;
+}
+
+//intitalize a new rope
+rope* rope_new(string s)
+//@ensures is_rope(\result);
+//@ensures rope_length(\result) == string_length(s);
+{
+  if (string_length(s) == 0) return NULL;
+  rope* R = alloc(rope);
+  R->left = NULL;
+  R->right = NULL;
+  R->len = string_length(s);
+  R->data = s;
+  return R;
+}
+
+// join two rope together
+rope* rope_join(rope* R, rope* S)
+//@requires is_rope(R) && is_rope(S);
+//@requires rope_length(R) <= int_max() - rope_length(S);
+//@ensures rope_length(\result) == rope_length(R) + rope_length(S);
+//@ensures is_rope(\result);
+{
+  if (R == NULL) return S;
+  if (S == NULL) return R;
+  if (R == NULL && S == NULL) return NULL;
+  rope* concatenation_node = alloc(rope);
+  concatenation_node->left = R;
+  concatenation_node->right = S;
+  concatenation_node->len = rope_length(R) + rope_length(S);
+  return concatenation_node;
+}
+
+//return the i th char of rope
+char rope_charat(rope* R, int i)
+//@requires is_rope(R);
+//@requires 0 <= i && i < rope_length(R);
+{
+  // base case
+  if (is_leaf_node(R)) return string_charat(R->data, i); 
+  // recursive case
+  if (i < rope_length(R->left)) {
+    return rope_charat(R->left, i);
+  }
+  else {
+    return rope_charat(R->right, i - rope_length(R->left));
+  }
+}
+
+//convert rope to a string
+string rope_tostring(rope* R)
+//@requires is_rope(R);
+//@ensures string_length(\result) == rope_length(R);
+{
+  if (R == NULL) return "";
+  // base case for leaf
+  if (is_leaf_node(R)) return R->data;
+  else {
+    // recursive case for concatenation_node
+    return string_join(rope_tostring(R->left), rope_tostring(R->right));
+  }
+}
+
+//helper function which is the base case for rope_sub
+rope* rope_leaf_sub(rope* R, int lo, int hi)
+//@requires is_rope(R);
+//@requires 0 <= lo && lo <= hi && hi <= rope_length(R);
+//@ensures is_rope(\result);
+//@ensures rope_length(\result) == hi - lo;
+{
+  if (lo == hi) return NULL;
+  if (lo == 0 && hi == rope_length(R)) {
+    return R;
+  }
+  else {
+    rope* new_R = alloc(rope);
+    new_R->len = string_length(string_sub(R->data, lo, hi));
+    new_R->left = NULL;
+    new_R->right = NULL;
+    new_R->data = string_sub(R->data, lo, hi);
+    return new_R;
+  }
+}
+
+// the rope_sub main function 
+rope* rope_sub(rope* R, int lo, int hi)
+//@requires is_rope(R);
+//@requires 0 <= lo && lo <= hi && hi <= rope_length(R);
+//@ensures is_rope(\result);
+//@ensures rope_length(\result) == hi - lo;
+{
+  if (R == NULL) {
+    return NULL;
+  }
+  else if (is_leaf_node(R)) {
+    return rope_leaf_sub(R, lo, hi);
+  }
+  else {
+    // recursive case 
+    //@assert is_concatenation_node(R);
+    if (lo == 0 && hi == rope_length(R)) {
+      return R;
+    }
+    else if (lo == hi) {
+      return NULL;
+    }
+    else if (hi <= rope_length(R->left)) {
+      return rope_sub(R->left, lo, hi);
+    }
+    else if (lo < rope_length(R->left)) {
+      rope* res = alloc(rope);
+      res->left = rope_sub(R->left, lo, rope_length(R->left));
+      res->right = rope_sub(R->right, 0, hi - rope_length(R->left));
+      res->len = res->left->len + res->right->len;
+      return res;
+    }
+    else {
+      //@assert lo >= rope_length(R->left);
+      return rope_sub(R->right, lo - rope_length(R->left),
+                      hi - rope_length(R->left));
+    }
+  }
+}
+
+// the function compare whether two keys are the same
+bool key_equiv_function(key x, key y)
+/*@requires x != NULL && \hastag(string*, x) && 
+            y != NULL && \hastag(string*, y); @*/
+{
+  string* s1 = (string*)x;
+  string* s2 = (string*)y;
+  return string_equal(*s1, *s2);
+}
+
+// hash a key to a int value
+int hash_function(key x)
+//@requires x != NULL && \hastag(string*, x);
+{ 
+  string* s = (string*)x;
+  int h = 0;
+  for (int i = 0; i < string_length(*s); i++) {
+    h = h + char_ord(string_charat(*s, i));
+    h = 1664525 * h + 1013904223;
+  }
+  return h;
+}
+
+//helper function for rope_reduce
+rope* rope_reduce_helper(rope* R,  hdict_t H)
+//@requires is_rope(R);
+{
+  string* str = alloc(string);
+  *str = rope_tostring(R);
+  if (R == NULL) {
+    return  NULL;
+    // H: str -> *R
+  } else if ((rope*) hdict_lookup(H, (void*)str) != NULL) {
+    return (rope*) hdict_lookup(H, (void*)str);
+  } else if (is_leaf_node(R)) {
+    string* s = alloc(string);
+    *s = rope_tostring(R);
+    hdict_insert(H, (void*)s, (void*)R);
+    return R;
+  } else {
+    rope* left = rope_reduce_helper(R->left, H);
+    rope* right = rope_reduce_helper(R->right, H);
+    R->left = left;
+    R->right = right;
+    string* s = alloc(string);
+    *s = rope_tostring(R);
+    hdict_insert(H, (void*)s, (void*)R);
+    return R;
+  }
+}
+
+// main function for rope_reduce
+void rope_reduce(rope*[] A, int n)
+//@requires n == \length(A);
+{
+  if (n == 0) return;
+  int capacity = n * 10;
+  key_equiv_fn* key_equiv = &key_equiv_function;
+  key_hash_fn* hash = &hash_function;
+  hdict_t H = hdict_new(capacity, key_equiv, hash);
+  for (int i = 0; i < n; i++)
+    //@loop_invariant 0 <= i;
+    {
+      A[i] = rope_reduce_helper(A[i], H);
+    }
+  return;
+}
+
+
+/* ... and HERE */
+
+typedef rope* rope_t;
+
+
+/************************************/
+/* Interface (leave this in place!) */
+/************************************/
+
+// typedef _______* rope_t;
+
+int    rope_length(rope_t R)
+  /*@ensures \result >= 0; @*/ ;
+rope_t rope_new(string s)
+  /*@ensures rope_length(\result) == string_length(s); @*/ ;
+rope_t rope_join(rope_t R, rope_t S)
+  /*@requires rope_length(R) <= int_max() - rope_length(S); @*/
+  /*@ensures rope_length(\result) == rope_length(R) + rope_length(S); @*/ ;
+string rope_tostring(rope_t R)
+  /*@ensures string_length(\result) == rope_length(R); @*/ ;
+char   rope_charat(rope_t R, int i)
+  /*@requires 0 <= i && i < rope_length(R); @*/ ;
+rope_t rope_sub(rope_t R, int lo, int hi)
+  /*@requires 0 <= lo && lo <= hi && hi <= rope_length(R); @*/
+  /*@ensures rope_length(\result) == hi - lo; @*/ ;
+void   rope_reduce(rope_t[] A, int n)

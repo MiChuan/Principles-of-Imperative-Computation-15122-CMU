@@ -1,0 +1,101 @@
+08/17/18 16:28:33:219 | [INFO] |  |  |  | OOBELib |  |  | 309017 | __OOBELIB_LOG_FILE__
+08/17/18 16:28:33:219 | [INFO] |  |  |  | OOBELib |  |  | 309017 | *************OOBELib Session Starts*************
+08/17/18 16:28:33:219 | [INFO] |  |  |  | OOBELib |  |  | 309017 | Version 10.0.0.169,7.0
+
+08/17/18 16:28:33:220 | [INFO] |  |  |  | PCDService |  |  | 309017 | PCD Service in non-threaded mode
+08/17/18 16:28:33:222 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table Not found parallel to binary, looking into P7 folder
+08/17/18 16:28:33:223 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table file doesnot in parallel to binary or inside the binary, falling back to ACF path.
+08/17/18 16:28:33:223 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table loaded from path: /Library/Application Support/Adobe/OOBE/PDApp/P7/dispatchtable.xml 
+08/17/18 16:28:33:224 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | (re)load Local Dispatch Table status-[0].
+08/17/18 16:28:33:225 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Scope : [2]
+08/17/18 16:28:33:225 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Setting scope to GM
+08/17/18 16:28:33:237 | [ERROR] |  |  |  | OPMWrapper |  |  | 309017 | Failed in getting value for key in OPMGetValueForKey
+08/17/18 16:28:33:237 | [INFO] |  |  |  | OOBELib |  |  | 309017 | Failed to get Proxy username in OPM DB
+08/17/18 16:28:33:238 | [INFO] |  |  |  | AXFBLicensing |  |  | 309017 | Path : /Library/Application Support/Adobe/Adobe Desktop Common/ADS/Adobe Desktop Service.app/..//axlibv7.dylib
+08/17/18 16:28:33:238 | [INFO] |  |  |  | AXFBLicensing |  |  | 309017 | Failed to load axlibv7.dylib
+08/17/18 16:28:33:238 | [INFO] |  |  |  | AXFBLicensing |  |  | 309017 | Trying default path
+08/17/18 16:28:33:252 | [INFO] |  |  |  | AXFBLicensing |  |  | 309017 | All function pointers successfully retrieved
+08/17/18 16:28:33:252 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | Starting up SLCore 2.0 Release (build 2.0.1.360321).
+08/17/18 16:28:33:252 | [ERROR] |  |  |  | SLCoreService |  |  | 309017 | user based licensing: 0
+08/17/18 16:28:33:252 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | Service construction took 0.5 ms and succeed.
+08/17/18 16:28:33:252 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 309017 | Returning SLCoreServiceWrapper Initialize, Ref Count 1
+08/17/18 16:28:33:266 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 309017 | Returning SLCoreServiceWrapper GetInstance, Ref Count 1
+08/17/18 16:28:33:266 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | LoadMachineKey : waiting for semaphore signal
+08/17/18 16:28:33:266 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | LoadMachineKey : semaphore acquired
+08/17/18 16:28:33:267 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | LoadMachineKey : semaphore signalled
+08/17/18 16:28:33:267 | [INFO] |  |  |  | OOBELib |  |  | 309017 | GetSeatID : MachineID successfully retrieved
+08/17/18 16:28:33:269 | [INFO] |  |  |  | OOBELib |  |  | 309017 | OOBELibImpl::CommitPCD STARTED
+08/17/18 16:28:33:272 | [DEBUG] |  |  |  | ServiceLoader |  |  | 309017 | looking for library /Applications/Utilities/Adobe Application Manager/P7/adobe_upgrade.framework/adobe_upgrade
+08/17/18 16:28:33:272 | [DEBUG] |  |  |  | ServiceLoader |  |  | 309017 | Found library /Applications/Utilities/Adobe Application Manager/P7/adobe_upgrade.dylib
+08/17/18 16:28:33:291 | [INFO] |  |  |  | OOBELib |  |  | 309017 | SN not validated in this session
+08/17/18 16:28:33:291 | [INFO] |  |  |  | OOBELib |  |  | 309017 | No SN to be remembered
+08/17/18 16:28:33:291 | [INFO] |  |  |  | OOBELib |  |  | 309017 | User hasn't registered
+08/17/18 16:28:33:291 | [INFO] |  |  |  | OOBELib |  |  | 309017 | OOBELibImpl::CommitPCD ENDED
+08/17/18 16:28:33:291 | [INFO] |  |  |  | OOBELib |  |  | 309017 | Closing AdobeIALClient 1.0 Release (build 1.0.6.3) session.
+08/17/18 16:28:33:292 | [INFO] |  |  |  | OOBELib |  |  | 309017 | *************OOBELib Session Ends*************
+08/17/18 16:28:33:292 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | Shutting down SLCore 2.0 Release (build 2.0.1.360321).
+08/17/18 16:28:33:292 | [INFO] |  |  |  | SLCoreService |  |  | 309017 | Service destruction took 0.2 ms and succeed.
+08/17/18 16:28:33:292 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 309017 | Returning SLCoreServiceWrapper Release, Ref Count 0
+08/17/18 16:28:33:330 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table Not found parallel to binary, looking into P7 folder
+08/17/18 16:28:33:330 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table file doesnot in parallel to binary or inside the binary, falling back to ACF path.
+08/17/18 16:28:33:330 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Dispatch table loaded from path: /Library/Application Support/Adobe/OOBE/PDApp/P7/dispatchtable.xml 
+08/17/18 16:28:33:331 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | (re)load Local Dispatch Table status-[0].
+08/17/18 16:28:33:332 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Scope : [2]
+08/17/18 16:28:33:332 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Setting scope to GM
+08/17/18 16:28:33:332 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | EndPoint requested: [IdentityManagement]
+08/17/18 16:28:33:332 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Length of the URL: [33]
+08/17/18 16:28:33:332 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Returning from getEndpointAddr: [0]
+08/17/18 16:28:33:333 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | EndPoint requested: [IdentityManagement]
+08/17/18 16:28:33:333 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Length of the URL: [33]
+08/17/18 16:28:33:334 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | URL found [https://ims-prod06.adobelogin.com]
+08/17/18 16:28:33:334 | [INFO] |  |  |  | DispatchClientLib |  |  | 309017 | Returning from getEndpointAddr: [0]
+11/15/18 14:45:07:725 | [INFO] |  |  |  | OOBELib |  |  | 433199 | *************OOBELib Session Starts*************
+11/15/18 14:45:07:725 | [INFO] |  |  |  | OOBELib |  |  | 433199 | Version 10.0.0.169,7.0
+
+11/15/18 14:45:07:793 | [INFO] |  |  |  | PCDService |  |  | 433199 | PCD Service in non-threaded mode
+11/15/18 14:45:07:851 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table Not found parallel to binary, looking into P7 folder
+11/15/18 14:45:07:851 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table file doesnot in parallel to binary or inside the binary, falling back to ACF path.
+11/15/18 14:45:07:851 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table loaded from path: /Library/Application Support/Adobe/OOBE/PDApp/P7/dispatchtable.xml 
+11/15/18 14:45:07:852 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | (re)load Local Dispatch Table status-[0].
+11/15/18 14:45:07:852 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Scope : [2]
+11/15/18 14:45:07:853 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Setting scope to GM
+11/15/18 14:45:07:875 | [ERROR] |  |  |  | OPMWrapper |  |  | 433199 | Failed in getting value for key in OPMGetValueForKey
+11/15/18 14:45:07:875 | [INFO] |  |  |  | OOBELib |  |  | 433199 | Failed to get Proxy username in OPM DB
+11/15/18 14:45:07:876 | [INFO] |  |  |  | AXFBLicensing |  |  | 433199 | Path : /Library/Application Support/Adobe/Adobe Desktop Common/ADS/Adobe Desktop Service.app/..//axlibv7.dylib
+11/15/18 14:45:07:876 | [INFO] |  |  |  | AXFBLicensing |  |  | 433199 | Failed to load axlibv7.dylib
+11/15/18 14:45:07:876 | [INFO] |  |  |  | AXFBLicensing |  |  | 433199 | Trying default path
+11/15/18 14:45:07:890 | [INFO] |  |  |  | AXFBLicensing |  |  | 433199 | All function pointers successfully retrieved
+11/15/18 14:45:07:890 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | Starting up SLCore 2.0 Release (build 2.0.1.360321).
+11/15/18 14:45:07:891 | [ERROR] |  |  |  | SLCoreService |  |  | 433199 | user based licensing: 0
+11/15/18 14:45:07:891 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | Service construction took 0.6 ms and succeed.
+11/15/18 14:45:07:891 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 433199 | Returning SLCoreServiceWrapper Initialize, Ref Count 1
+11/15/18 14:45:07:950 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 433199 | Returning SLCoreServiceWrapper GetInstance, Ref Count 1
+11/15/18 14:45:07:950 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | LoadMachineKey : waiting for semaphore signal
+11/15/18 14:45:07:956 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | LoadMachineKey : semaphore acquired
+11/15/18 14:45:07:957 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | LoadMachineKey : semaphore signalled
+11/15/18 14:45:07:957 | [INFO] |  |  |  | OOBELib |  |  | 433199 | GetSeatID : MachineID successfully retrieved
+11/15/18 14:45:08:008 | [INFO] |  |  |  | OOBELib |  |  | 433199 | OOBELibImpl::CommitPCD STARTED
+11/15/18 14:45:08:011 | [DEBUG] |  |  |  | ServiceLoader |  |  | 433199 | looking for library /Applications/Utilities/Adobe Application Manager/P7/adobe_upgrade.framework/adobe_upgrade
+11/15/18 14:45:08:011 | [DEBUG] |  |  |  | ServiceLoader |  |  | 433199 | Found library /Applications/Utilities/Adobe Application Manager/P7/adobe_upgrade.dylib
+11/15/18 14:45:08:056 | [INFO] |  |  |  | OOBELib |  |  | 433199 | SN not validated in this session
+11/15/18 14:45:08:056 | [INFO] |  |  |  | OOBELib |  |  | 433199 | No SN to be remembered
+11/15/18 14:45:08:056 | [INFO] |  |  |  | OOBELib |  |  | 433199 | User hasn't registered
+11/15/18 14:45:08:056 | [INFO] |  |  |  | OOBELib |  |  | 433199 | OOBELibImpl::CommitPCD ENDED
+11/15/18 14:45:08:056 | [INFO] |  |  |  | OOBELib |  |  | 433199 | Closing AdobeIALClient 1.0 Release (build 1.0.6.3) session.
+11/15/18 14:45:08:057 | [INFO] |  |  |  | OOBELib |  |  | 433199 | *************OOBELib Session Ends*************
+11/15/18 14:45:08:057 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | Shutting down SLCore 2.0 Release (build 2.0.1.360321).
+11/15/18 14:45:08:057 | [INFO] |  |  |  | SLCoreService |  |  | 433199 | Service destruction took 0.2 ms and succeed.
+11/15/18 14:45:08:057 | [INFO] |  |  |  | SLCoreServiceWrapper |  |  | 433199 | Returning SLCoreServiceWrapper Release, Ref Count 0
+11/15/18 14:45:08:370 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table Not found parallel to binary, looking into P7 folder
+11/15/18 14:45:08:370 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table file doesnot in parallel to binary or inside the binary, falling back to ACF path.
+11/15/18 14:45:08:371 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Dispatch table loaded from path: /Library/Application Support/Adobe/OOBE/PDApp/P7/dispatchtable.xml 
+11/15/18 14:45:08:372 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | (re)load Local Dispatch Table status-[0].
+11/15/18 14:45:08:372 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Scope : [2]
+11/15/18 14:45:08:372 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Setting scope to GM
+11/15/18 14:45:08:372 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | EndPoint requested: [IdentityManagement]
+11/15/18 14:45:08:373 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Length of the URL: [33]
+11/15/18 14:45:08:373 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Returning from getEndpointAddr: [0]
+11/15/18 14:45:08:373 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | EndPoint requested: [IdentityManagement]
+11/15/18 14:45:08:374 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Length of the URL: [33]
+11/15/18 14:45:08:374 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | URL found [https://ims-prod06.adobelogin.com]
+11/15/18 14:45:08:374 | [INFO] |  |  |  | DispatchClientLib |  |  | 433199 | Returning from getEndpointAddr: [0]

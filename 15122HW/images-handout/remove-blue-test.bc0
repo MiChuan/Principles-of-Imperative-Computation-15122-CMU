@@ -1,0 +1,695 @@
+C0 C0 FF EE       # magic number
+00 13             # version 9, arch = 1 (64 bits)
+
+00 22             # int pool count
+# int pool
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+7F FF FF FF
+80 00 00 00
+FF FF FF 00
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 EE
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 AA
+00 00 00 BB
+00 00 00 CC
+00 00 00 FF
+00 00 00 EE
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 AA
+00 00 00 BB
+00 00 00 CC
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 FF
+00 00 00 AA
+00 00 00 BB
+
+00 C8             # string pool total size
+# string pool
+72 65 6D 6F 76 65 2D 62 6C 75 65 2D 74 65 73 74 2E 63 30 3A 39 2E 33 2D 39 2E 33 33 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "remove-blue-test.c0:9.3-9.33: assert failed"
+72 65 6D 6F 76 65 2D 62 6C 75 65 2D 74 65 73 74 2E 63 30 3A 31 30 2E 33 2D 31 30 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "remove-blue-test.c0:10.3-10.29: assert failed"
+72 65 6D 6F 76 65 2D 62 6C 75 65 2D 74 65 73 74 2E 63 30 3A 31 31 2E 33 2D 31 31 2E 33 33 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "remove-blue-test.c0:11.3-11.33: assert failed"
+72 65 6D 6F 76 65 2D 62 6C 75 65 2D 74 65 73 74 2E 63 30 3A 31 32 2E 33 2D 31 32 2E 33 31 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "remove-blue-test.c0:12.3-12.31: assert failed"
+41 6C 6C 20 74 65 73 74 73 20 70 61 73 73 65 64 21 00  # "All tests passed!"
+
+00 15             # function count
+# function_pool
+
+#<main>
+00 00             # number of arguments = 0
+00 07             # number of local variables = 7
+01 50             # code length = 336 bytes
+10 01    # bipush 1        # 1
+BC 04    # newarray 4      # alloc_array(pixel_t, 1)
+36 00    # vstore 0        # A = alloc_array(pixel_t, 1);
+15 00    # vload 0         # A
+10 00    # bipush 0        # 0
+63       # aadds           # &A[0]
+13 00 07 # ildc 7          # c[7] = 255
+10 01    # bipush 1        # 1
+10 03    # bipush 3        # 3
+10 04    # bipush 4        # 4
+B8 00 05 # invokestatic 5  # make_pixel(255, 1, 3, 4)
+4E       # imstore         # A[0] = make_pixel(255, 1, 3, 4);
+15 00    # vload 0         # A
+10 01    # bipush 1        # 1
+10 01    # bipush 1        # 1
+B8 00 13 # invokestatic 19 # remove_blue(A, 1, 1)
+36 01    # vstore 1        # B = remove_blue(A, 1, 1);
+15 00    # vload 0         # A
+10 00    # bipush 0        # 0
+63       # aadds           # &A[0]
+2E       # imload          # A[0]
+13 00 08 # ildc 8          # c[8] = 255
+10 01    # bipush 1        # 1
+10 03    # bipush 3        # 3
+10 04    # bipush 4        # 4
+B8 00 14 # invokestatic 20 # assert_pixels_eq(A[0], 255, 1, 3, 4)
+57       # pop             # (ignore result)
+15 01    # vload 1         # B
+10 00    # bipush 0        # 0
+63       # aadds           # &B[0]
+2E       # imload          # B[0]
+13 00 09 # ildc 9          # c[9] = 255
+10 01    # bipush 1        # 1
+10 03    # bipush 3        # 3
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(B[0], 255, 1, 3, 0)
+57       # pop             # (ignore result)
+10 04    # bipush 4        # 4
+BC 04    # newarray 4      # alloc_array(pixel_t, 4)
+36 00    # vstore 0        # A = alloc_array(pixel_t, 4);
+15 00    # vload 0         # A
+10 00    # bipush 0        # 0
+63       # aadds           # &A[0]
+10 02    # bipush 2        # 2
+10 00    # bipush 0        # 0
+13 00 0A # ildc 10         # c[10] = 255
+13 00 0B # ildc 11         # c[11] = 238
+B8 00 05 # invokestatic 5  # make_pixel(2, 0, 255, 238)
+4E       # imstore         # A[0] = make_pixel(2, 0, 255, 238);
+15 00    # vload 0         # A
+10 01    # bipush 1        # 1
+63       # aadds           # &A[1]
+13 00 0C # ildc 12         # c[12] = 255
+13 00 0D # ildc 13         # c[13] = 255
+13 00 0E # ildc 14         # c[14] = 255
+13 00 0F # ildc 15         # c[15] = 255
+B8 00 05 # invokestatic 5  # make_pixel(255, 255, 255, 255)
+4E       # imstore         # A[1] = make_pixel(255, 255, 255, 255);
+15 00    # vload 0         # A
+10 02    # bipush 2        # 2
+63       # aadds           # &A[2]
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+B8 00 05 # invokestatic 5  # make_pixel(0, 0, 0, 0)
+4E       # imstore         # A[2] = make_pixel(0, 0, 0, 0);
+15 00    # vload 0         # A
+10 03    # bipush 3        # 3
+63       # aadds           # &A[3]
+10 00    # bipush 0        # 0
+13 00 10 # ildc 16         # c[16] = 170
+13 00 11 # ildc 17         # c[17] = 187
+13 00 12 # ildc 18         # c[18] = 204
+B8 00 05 # invokestatic 5  # make_pixel(0, 170, 187, 204)
+4E       # imstore         # A[3] = make_pixel(0, 170, 187, 204);
+15 00    # vload 0         # A
+10 02    # bipush 2        # 2
+10 02    # bipush 2        # 2
+B8 00 13 # invokestatic 19 # remove_blue(A, 2, 2)
+36 01    # vstore 1        # B = remove_blue(A, 2, 2);
+15 00    # vload 0         # A
+10 00    # bipush 0        # 0
+63       # aadds           # &A[0]
+2E       # imload          # A[0]
+10 02    # bipush 2        # 2
+10 00    # bipush 0        # 0
+13 00 13 # ildc 19         # c[19] = 255
+13 00 14 # ildc 20         # c[20] = 238
+B8 00 14 # invokestatic 20 # assert_pixels_eq(A[0], 2, 0, 255, 238)
+57       # pop             # (ignore result)
+15 00    # vload 0         # A
+10 01    # bipush 1        # 1
+63       # aadds           # &A[1]
+2E       # imload          # A[1]
+13 00 15 # ildc 21         # c[21] = 255
+13 00 16 # ildc 22         # c[22] = 255
+13 00 17 # ildc 23         # c[23] = 255
+13 00 18 # ildc 24         # c[24] = 255
+B8 00 14 # invokestatic 20 # assert_pixels_eq(A[1], 255, 255, 255, 255)
+57       # pop             # (ignore result)
+15 00    # vload 0         # A
+10 02    # bipush 2        # 2
+63       # aadds           # &A[2]
+2E       # imload          # A[2]
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(A[2], 0, 0, 0, 0)
+57       # pop             # (ignore result)
+15 00    # vload 0         # A
+10 03    # bipush 3        # 3
+63       # aadds           # &A[3]
+2E       # imload          # A[3]
+10 00    # bipush 0        # 0
+13 00 19 # ildc 25         # c[25] = 170
+13 00 1A # ildc 26         # c[26] = 187
+13 00 1B # ildc 27         # c[27] = 204
+B8 00 14 # invokestatic 20 # assert_pixels_eq(A[3], 0, 170, 187, 204)
+57       # pop             # (ignore result)
+15 01    # vload 1         # B
+10 00    # bipush 0        # 0
+63       # aadds           # &B[0]
+2E       # imload          # B[0]
+10 02    # bipush 2        # 2
+10 00    # bipush 0        # 0
+13 00 1C # ildc 28         # c[28] = 255
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(B[0], 2, 0, 255, 0)
+57       # pop             # (ignore result)
+15 01    # vload 1         # B
+10 01    # bipush 1        # 1
+63       # aadds           # &B[1]
+2E       # imload          # B[1]
+13 00 1D # ildc 29         # c[29] = 255
+13 00 1E # ildc 30         # c[30] = 255
+13 00 1F # ildc 31         # c[31] = 255
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(B[1], 255, 255, 255, 0)
+57       # pop             # (ignore result)
+15 01    # vload 1         # B
+10 02    # bipush 2        # 2
+63       # aadds           # &B[2]
+2E       # imload          # B[2]
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(B[2], 0, 0, 0, 0)
+57       # pop             # (ignore result)
+15 01    # vload 1         # B
+10 03    # bipush 3        # 3
+63       # aadds           # &B[3]
+2E       # imload          # B[3]
+10 00    # bipush 0        # 0
+13 00 20 # ildc 32         # c[32] = 170
+13 00 21 # ildc 33         # c[33] = 187
+10 00    # bipush 0        # 0
+B8 00 14 # invokestatic 20 # assert_pixels_eq(B[3], 0, 170, 187, 0)
+57       # pop             # (ignore result)
+14 00 B6 # aldc 182        # s[182] = "All tests passed!"
+B7 00 03 # invokenative 3  # println("All tests passed!")
+57       # pop             # (ignore result)
+10 00    # bipush 0        # 0
+B0       # return          # 
+
+
+#<get_red>
+00 01             # number of arguments = 1
+00 01             # number of local variables = 1
+00 0A             # code length = 10 bytes
+15 00    # vload 0         # p
+10 10    # bipush 16       # 16
+7A       # ishr            # (p >> 16)
+13 00 00 # ildc 0          # c[0] = 255
+7E       # iand            # ((p >> 16) & 255)
+B0       # return          # 
+
+
+#<get_green>
+00 01             # number of arguments = 1
+00 01             # number of local variables = 1
+00 0A             # code length = 10 bytes
+15 00    # vload 0         # p
+10 08    # bipush 8        # 8
+7A       # ishr            # (p >> 8)
+13 00 01 # ildc 1          # c[1] = 255
+7E       # iand            # ((p >> 8) & 255)
+B0       # return          # 
+
+
+#<get_blue>
+00 01             # number of arguments = 1
+00 01             # number of local variables = 1
+00 07             # code length = 7 bytes
+15 00    # vload 0         # p
+13 00 02 # ildc 2          # c[2] = 255
+7E       # iand            # (p & 255)
+B0       # return          # 
+
+
+#<get_alpha>
+00 01             # number of arguments = 1
+00 01             # number of local variables = 1
+00 0A             # code length = 10 bytes
+15 00    # vload 0         # p
+10 18    # bipush 24       # 24
+7A       # ishr            # (p >> 24)
+13 00 03 # ildc 3          # c[3] = 255
+7E       # iand            # ((p >> 24) & 255)
+B0       # return          # 
+
+
+#<make_pixel>
+00 04             # number of arguments = 4
+00 04             # number of local variables = 4
+00 15             # code length = 21 bytes
+15 00    # vload 0         # alpha
+10 18    # bipush 24       # 24
+78       # ishl            # (alpha << 24)
+15 01    # vload 1         # red
+10 10    # bipush 16       # 16
+78       # ishl            # (red << 16)
+80       # ior             # ((alpha << 24) | (red << 16))
+15 02    # vload 2         # green
+10 08    # bipush 8        # 8
+78       # ishl            # (green << 8)
+80       # ior             # (((alpha << 24) | (red << 16)) | (green << 8))
+15 03    # vload 3         # blue
+80       # ior             # ((((alpha << 24) | (red << 16)) | (green << 8)) | blue)
+B0       # return          # 
+
+
+#<int_size>
+00 00             # number of arguments = 0
+00 04             # number of local variables = 4
+00 03             # code length = 3 bytes
+10 04    # bipush 4        # 4
+B0       # return          # 
+
+
+#<int_max>
+00 00             # number of arguments = 0
+00 04             # number of local variables = 4
+00 04             # code length = 4 bytes
+13 00 04 # ildc 4          # c[4] = 2147483647
+B0       # return          # 
+
+
+#<int_min>
+00 00             # number of arguments = 0
+00 04             # number of local variables = 4
+00 04             # code length = 4 bytes
+13 00 05 # ildc 5          # c[5] = -2147483648
+B0       # return          # 
+
+
+#<abs>
+00 01             # number of arguments = 1
+00 04             # number of local variables = 4
+00 15             # code length = 21 bytes
+15 00    # vload 0         # x
+10 00    # bipush 0        # 0
+A1 00 06 # if_icmplt +6    # if (x < 0) goto <06:cond_true>
+A7 00 0B # goto +11        # goto <07:cond_false>
+# <06:cond_true>
+10 00    # bipush 0        # 
+15 00    # vload 0         # x
+64       # isub            # -(x)
+A7 00 05 # goto +5         # goto <08:cond_end>
+# <07:cond_false>
+15 00    # vload 0         # x
+# <08:cond_end>
+B0       # return          # 
+
+
+#<max>
+00 02             # number of arguments = 2
+00 04             # number of local variables = 4
+00 12             # code length = 18 bytes
+15 00    # vload 0         # x
+15 01    # vload 1         # y
+A3 00 06 # if_icmpgt +6    # if (x > y) goto <00:cond_true>
+A7 00 08 # goto +8         # goto <01:cond_false>
+# <00:cond_true>
+15 00    # vload 0         # x
+A7 00 05 # goto +5         # goto <02:cond_end>
+# <01:cond_false>
+15 01    # vload 1         # y
+# <02:cond_end>
+B0       # return          # 
+
+
+#<min>
+00 02             # number of arguments = 2
+00 04             # number of local variables = 4
+00 12             # code length = 18 bytes
+15 00    # vload 0         # x
+15 01    # vload 1         # y
+A3 00 06 # if_icmpgt +6    # if (x > y) goto <03:cond_true>
+A7 00 08 # goto +8         # goto <04:cond_false>
+# <03:cond_true>
+15 01    # vload 1         # y
+A7 00 05 # goto +5         # goto <05:cond_end>
+# <04:cond_false>
+15 00    # vload 0         # x
+# <05:cond_end>
+B0       # return          # 
+
+
+#<int2hex>
+00 01             # number of arguments = 1
+00 04             # number of local variables = 4
+00 52             # code length = 82 bytes
+10 02    # bipush 2        # 2
+B8 00 06 # invokestatic 6  # int_size()
+68       # imul            # (2 * int_size())
+36 01    # vstore 1        # digits = (2 * int_size());
+15 01    # vload 1         # digits
+10 01    # bipush 1        # 1
+60       # iadd            # (digits + 1)
+BC 01    # newarray 1      # alloc_array(char, (digits + 1))
+36 02    # vstore 2        # s = alloc_array(char, (digits + 1));
+15 02    # vload 2         # s
+15 01    # vload 1         # digits
+63       # aadds           # &s[digits]
+10 00    # bipush 0        # '\000'
+55       # cmstore         # s[digits] = '\0';
+10 00    # bipush 0        # 0
+36 03    # vstore 3        # i = 0;
+# <17:loop>
+15 03    # vload 3         # i
+15 01    # vload 1         # digits
+A1 00 06 # if_icmplt +6    # if (i < digits) goto <18:body>
+A7 00 28 # goto +40        # goto <19:exit>
+# <18:body>
+15 02    # vload 2         # s
+15 01    # vload 1         # digits
+15 03    # vload 3         # i
+64       # isub            # (digits - i)
+10 01    # bipush 1        # 1
+64       # isub            # ((digits - i) - 1)
+63       # aadds           # &s[((digits - i) - 1)]
+15 00    # vload 0         # x
+10 0F    # bipush 15       # 15
+7E       # iand            # (x & 15)
+B8 00 0D # invokestatic 13 # hexdig2char((x & 15))
+55       # cmstore         # s[((digits - i) - 1)] = hexdig2char((x & 15));
+15 00    # vload 0         # x
+10 04    # bipush 4        # 4
+7A       # ishr            # (x >> 4)
+36 00    # vstore 0        # x = (x >> 4);
+15 03    # vload 3         # i
+10 01    # bipush 1        # 1
+60       # iadd            # 
+36 03    # vstore 3        # i += 1;
+A7 FF D4 # goto -44        # goto <17:loop>
+# <19:exit>
+15 02    # vload 2         # s
+B7 00 02 # invokenative 2  # string_from_chararray(s)
+B0       # return          # 
+
+
+#<hexdig2char>
+00 01             # number of arguments = 1
+00 04             # number of local variables = 4
+00 4C             # code length = 76 bytes
+10 00    # bipush 0        # 0
+15 00    # vload 0         # d
+A4 00 06 # if_icmple +6    # if (0 <= d) goto <12:and>
+A7 00 1C # goto +28        # goto <10:else>
+# <12:and>
+15 00    # vload 0         # d
+10 0A    # bipush 10       # 10
+A1 00 06 # if_icmplt +6    # if (d < 10) goto <09:then>
+A7 00 12 # goto +18        # goto <10:else>
+# <09:then>
+10 30    # bipush 48       # '0'
+B7 00 01 # invokenative 1  # char_ord('0')
+15 00    # vload 0         # d
+60       # iadd            # (char_ord('0') + d)
+B7 00 00 # invokenative 0  # char_chr((char_ord('0') + d))
+B0       # return          # 
+A7 00 2C # goto +44        # goto <11:endif>
+# <10:else>
+10 0A    # bipush 10       # 10
+15 00    # vload 0         # d
+A4 00 06 # if_icmple +6    # if (10 <= d) goto <16:and>
+A7 00 1F # goto +31        # goto <14:else>
+# <16:and>
+15 00    # vload 0         # d
+10 10    # bipush 16       # 16
+A1 00 06 # if_icmplt +6    # if (d < 16) goto <13:then>
+A7 00 15 # goto +21        # goto <14:else>
+# <13:then>
+10 41    # bipush 65       # 'A'
+B7 00 01 # invokenative 1  # char_ord('A')
+15 00    # vload 0         # d
+10 0A    # bipush 10       # 10
+64       # isub            # (d - 10)
+60       # iadd            # (char_ord('A') + (d - 10))
+B7 00 00 # invokenative 0  # char_chr((char_ord('A') + (d - 10)))
+B0       # return          # 
+A7 00 06 # goto +6         # goto <15:endif>
+# <14:else>
+10 3F    # bipush 63       # '\?'
+B0       # return          # 
+# <15:endif>
+# <11:endif>
+
+
+#<is_valid_imagesize>
+00 02             # number of arguments = 2
+00 04             # number of local variables = 4
+00 2F             # code length = 47 bytes
+15 00    # vload 0         # width
+10 00    # bipush 0        # 0
+A3 00 06 # if_icmpgt +6    # if (width > 0) goto <23:and>
+A7 00 25 # goto +37        # goto <21:cond_false>
+# <23:and>
+15 01    # vload 1         # height
+10 00    # bipush 0        # 0
+A3 00 06 # if_icmpgt +6    # if (height > 0) goto <20:cond_true>
+A7 00 1B # goto +27        # goto <21:cond_false>
+# <20:cond_true>
+15 00    # vload 0         # width
+B8 00 07 # invokestatic 7  # int_max()
+15 01    # vload 1         # height
+6C       # idiv            # (int_max() / height)
+A4 00 06 # if_icmple +6    # if (width <= (int_max() / height)) goto <24:cond_true>
+A7 00 08 # goto +8         # goto <25:cond_false>
+# <24:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <26:cond_end>
+# <25:cond_false>
+10 00    # bipush 0        # false
+# <26:cond_end>
+A7 00 05 # goto +5         # goto <22:cond_end>
+# <21:cond_false>
+10 00    # bipush 0        # false
+# <22:cond_end>
+B0       # return          # 
+
+
+#<get_row>
+00 03             # number of arguments = 3
+00 04             # number of local variables = 4
+00 06             # code length = 6 bytes
+15 00    # vload 0         # index
+15 01    # vload 1         # width
+6C       # idiv            # (index / width)
+B0       # return          # 
+
+
+#<get_column>
+00 03             # number of arguments = 3
+00 04             # number of local variables = 4
+00 06             # code length = 6 bytes
+15 00    # vload 0         # index
+15 01    # vload 1         # width
+70       # irem            # (index % width)
+B0       # return          # 
+
+
+#<is_valid_pixel>
+00 04             # number of arguments = 4
+00 04             # number of local variables = 4
+00 3A             # code length = 58 bytes
+10 00    # bipush 0        # 0
+15 00    # vload 0         # row
+A4 00 06 # if_icmple +6    # if (0 <= row) goto <30:and>
+A7 00 30 # goto +48        # goto <28:cond_false>
+# <30:and>
+15 00    # vload 0         # row
+15 03    # vload 3         # height
+A1 00 06 # if_icmplt +6    # if (row < height) goto <27:cond_true>
+A7 00 26 # goto +38        # goto <28:cond_false>
+# <27:cond_true>
+10 00    # bipush 0        # 0
+15 01    # vload 1         # col
+A4 00 06 # if_icmple +6    # if (0 <= col) goto <31:cond_true>
+A7 00 17 # goto +23        # goto <32:cond_false>
+# <31:cond_true>
+15 01    # vload 1         # col
+15 02    # vload 2         # width
+A1 00 06 # if_icmplt +6    # if (col < width) goto <34:cond_true>
+A7 00 08 # goto +8         # goto <35:cond_false>
+# <34:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <36:cond_end>
+# <35:cond_false>
+10 00    # bipush 0        # false
+# <36:cond_end>
+A7 00 05 # goto +5         # goto <33:cond_end>
+# <32:cond_false>
+10 00    # bipush 0        # false
+# <33:cond_end>
+A7 00 05 # goto +5         # goto <29:cond_end>
+# <28:cond_false>
+10 00    # bipush 0        # false
+# <29:cond_end>
+B0       # return          # 
+
+
+#<get_index>
+00 04             # number of arguments = 4
+00 04             # number of local variables = 4
+00 09             # code length = 9 bytes
+15 00    # vload 0         # row
+15 02    # vload 2         # width
+68       # imul            # (row * width)
+15 01    # vload 1         # col
+60       # iadd            # ((row * width) + col)
+B0       # return          # 
+
+
+#<remove_blue>
+00 03             # number of arguments = 3
+00 07             # number of local variables = 7
+00 59             # code length = 89 bytes
+15 01    # vload 1         # width
+15 02    # vload 2         # height
+68       # imul            # (width * height)
+BC 04    # newarray 4      # alloc_array(pixel_t, (width * height))
+36 03    # vstore 3        # B = alloc_array(pixel_t, (width * height));
+10 00    # bipush 0        # 0
+36 04    # vstore 4        # j = 0;
+# <37:loop>
+15 04    # vload 4         # j
+15 02    # vload 2         # height
+A1 00 06 # if_icmplt +6    # if (j < height) goto <38:body>
+A7 00 42 # goto +66        # goto <39:exit>
+# <38:body>
+10 00    # bipush 0        # 0
+36 05    # vstore 5        # i = 0;
+# <40:loop>
+15 05    # vload 5         # i
+15 01    # vload 1         # width
+A1 00 06 # if_icmplt +6    # if (i < width) goto <41:body>
+A7 00 2A # goto +42        # goto <42:exit>
+# <41:body>
+15 04    # vload 4         # j
+15 05    # vload 5         # i
+15 01    # vload 1         # width
+15 02    # vload 2         # height
+B8 00 12 # invokestatic 18 # get_index(j, i, width, height)
+36 06    # vstore 6        # index = get_index(j, i, width, height);
+15 03    # vload 3         # B
+15 06    # vload 6         # index
+63       # aadds           # &B[index]
+15 00    # vload 0         # A
+15 06    # vload 6         # index
+63       # aadds           # &A[index]
+2E       # imload          # A[index]
+13 00 06 # ildc 6          # c[6] = -256
+7E       # iand            # (A[index] & -256)
+4E       # imstore         # B[index] = (A[index] & -256);
+15 05    # vload 5         # i
+10 01    # bipush 1        # 1
+60       # iadd            # 
+36 05    # vstore 5        # i += 1;
+A7 FF D2 # goto -46        # goto <40:loop>
+# <42:exit>
+15 04    # vload 4         # j
+10 01    # bipush 1        # 1
+60       # iadd            # 
+36 04    # vstore 4        # j += 1;
+A7 FF BA # goto -70        # goto <37:loop>
+# <39:exit>
+15 03    # vload 3         # B
+B0       # return          # 
+
+
+#<assert_pixels_eq>
+00 05             # number of arguments = 5
+00 07             # number of local variables = 7
+00 63             # code length = 99 bytes
+15 00    # vload 0         # p
+B8 00 04 # invokestatic 4  # get_alpha(p)
+15 01    # vload 1         # alpha
+9F 00 06 # if_cmpeq +6     # if (get_alpha(p) == alpha) goto <43:cond_true>
+A7 00 08 # goto +8         # goto <44:cond_false>
+# <43:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <45:cond_end>
+# <44:cond_false>
+10 00    # bipush 0        # false
+# <45:cond_end>
+14 00 00 # aldc 0          # s[0] = "remove-blue-test.c0:9.3-9.33: assert failed"
+CF       # assert          # assert(get_alpha(p) == alpha) [failure message on stack]
+15 00    # vload 0         # p
+B8 00 01 # invokestatic 1  # get_red(p)
+15 02    # vload 2         # red
+9F 00 06 # if_cmpeq +6     # if (get_red(p) == red) goto <46:cond_true>
+A7 00 08 # goto +8         # goto <47:cond_false>
+# <46:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <48:cond_end>
+# <47:cond_false>
+10 00    # bipush 0        # false
+# <48:cond_end>
+14 00 2C # aldc 44         # s[44] = "remove-blue-test.c0:10.3-10.29: assert failed"
+CF       # assert          # assert(get_red(p) == red) [failure message on stack]
+15 00    # vload 0         # p
+B8 00 02 # invokestatic 2  # get_green(p)
+15 03    # vload 3         # green
+9F 00 06 # if_cmpeq +6     # if (get_green(p) == green) goto <49:cond_true>
+A7 00 08 # goto +8         # goto <50:cond_false>
+# <49:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <51:cond_end>
+# <50:cond_false>
+10 00    # bipush 0        # false
+# <51:cond_end>
+14 00 5A # aldc 90         # s[90] = "remove-blue-test.c0:11.3-11.33: assert failed"
+CF       # assert          # assert(get_green(p) == green) [failure message on stack]
+15 00    # vload 0         # p
+B8 00 03 # invokestatic 3  # get_blue(p)
+15 04    # vload 4         # blue
+9F 00 06 # if_cmpeq +6     # if (get_blue(p) == blue) goto <52:cond_true>
+A7 00 08 # goto +8         # goto <53:cond_false>
+# <52:cond_true>
+10 01    # bipush 1        # true
+A7 00 05 # goto +5         # goto <54:cond_end>
+# <53:cond_false>
+10 00    # bipush 0        # false
+# <54:cond_end>
+14 00 88 # aldc 136        # s[136] = "remove-blue-test.c0:12.3-12.31: assert failed"
+CF       # assert          # assert(get_blue(p) == blue) [failure message on stack]
+10 00    # bipush 0        # dummy return value
+B0       # return          # 
+
+00 04             # native count
+# native pool
+00 01 00 5B       # char_chr
+00 01 00 5C       # char_ord
+00 01 00 60       # string_from_chararray
+00 01 00 0A       # println
+

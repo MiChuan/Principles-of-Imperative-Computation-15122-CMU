@@ -1,0 +1,171 @@
+#use <conio>
+int main()
+{
+  queue_t Q0 = queue_new();
+  assert(is_queue(Q0));
+  int* num1 = alloc(int);
+  *num1 = 8;
+  int* num2 = alloc(int);
+  *num2 = 5;
+  int* num3 = alloc(int);
+  *num3 = 15;
+  enq(Q0, (void*)num1);
+  assert(queue_size(Q0) == 1);
+  enq(Q0, (void*)num2);
+  assert(queue_size(Q0) == 2);
+  enq(Q0, (void*)num3);
+  assert(queue_size(Q0) == 3);
+  assert(is_queue(Q0));
+  assert(*(int*)queue_peek(Q0, 0) == 8);
+  assert(*(int*)queue_peek(Q0, 1) == 5);
+  assert(*(int*)queue_peek(Q0, 2) == 15);
+  assert(Q0->size == 3);
+  assert(*(int*)deq(Q0) == 8);
+  assert(*(int*)deq(Q0) == 5);
+  assert(*(int*)deq(Q0) == 15);
+  assert(is_queue(Q0));
+  assert(Q0->size == 0);
+  queue_t Q1 = queue_new();
+  int* num4 = alloc(int);
+  *num4 = 8;
+  int* num5 = alloc(int);
+  *num5 = 5;
+  int* num6 = alloc(int);
+  *num6 = 15;
+  enq(Q1, (void*)num4);
+  enq(Q1, (void*)num5);
+  enq(Q1, (void*)num6);
+  assert(*(int*)queue_peek(Q1, 0) == 8);
+  assert(*(int*)queue_peek(Q1, 1) == 5);
+  assert(*(int*)queue_peek(Q1, 2) == 15);
+  queue_reverse(Q1);
+  assert(*(int*)queue_peek(Q1, 0) == 15);
+  assert(*(int*)queue_peek(Q1, 1) == 5);
+  assert(*(int*)queue_peek(Q1, 2) == 8);
+  assert(*(int*)deq(Q1) == 15);
+  assert(*(int*)deq(Q1) == 5);
+  assert(*(int*)deq(Q1) == 8);
+  assert(Q1->size == 0);
+  queue_t Q2 = queue_new();
+  int* num7 = alloc(int);
+  *num7 = 8;
+  int* num8 = alloc(int);
+  *num8 = 6;
+  int* num9 = alloc(int);
+  *num9 = 10;
+  enq(Q2, (void*)num7);
+  enq(Q2, (void*)num8);
+  enq(Q2, (void*)num9);
+  assert(queue_all(Q2, &even));
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  int* num10 = alloc(int);
+  *num10 = 1;
+  int* num11 = alloc(int);
+  *num11 = 1;
+  int* num12 = alloc(int);
+  *num12 = 10;
+  enq(Q2, (void*)num10);
+  enq(Q2, (void*)num11);
+  enq(Q2, (void*)num12);
+  assert(!queue_all(Q2, &even));
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  int* num14 = alloc(int);
+  *num14 = 1;
+  int* num15 = alloc(int);
+  *num15 = 10;
+  enq(Q2, NULL);
+  enq(Q2, (void*)num14);
+  enq(Q2, (void*)num15);
+  assert(!queue_all(Q2, &even));
+  assert(!queue_all(Q2, &odd));
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  int* num16 = alloc(int);
+  *num16 = 1;
+  int* num17 = alloc(int);
+  *num17 = 10;
+  int* num18 = alloc(int);
+  *num18 = - 10;
+  enq(Q2, (void*)num16);
+  enq(Q2, (void*)num17);
+  enq(Q2, (void*)num18);
+  assert(!queue_all(Q2, &even));
+  assert(!queue_all(Q2, &odd));
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  enq(Q2, (void*)num10);
+  enq(Q2, (void*)num11);
+  enq(Q2, (void*)num12);
+  enq(Q2, NULL);
+  assert(queue_all(Q2, &incr));
+  assert(*(int*)deq(Q2) == 2);
+  assert(*(int*)deq(Q2) == 2);
+  assert(*(int*)deq(Q2) == 11);
+  assert(deq(Q2) == NULL);
+  assert(Q2->size == 0);
+  enq(Q2, (void*)num16); // 1
+  enq(Q2, (void*)num17); // 10
+  enq(Q2, (void*)num18); // -10
+  assert(*(int*)queue_iterate(Q2, NULL, &find_negative) == -10);
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  enq(Q2, NULL);
+  enq(Q2, (void*)num14);
+  enq(Q2, (void*)num15);
+  assert(queue_iterate(Q2, NULL, &find_negative) == NULL);
+  deq(Q2);
+  deq(Q2);
+  deq(Q2);
+  assert(Q2->size == 0);
+  enq(Q2, NULL);
+  enq(Q2, (void*)num14);
+  enq(Q2, (void*)num15);
+  queue_t QC = (queue_t)queue_iterate(Q2, (void*)queue_new(), &copy);
+  assert(deq(Q2) == NULL);
+  assert(*(int*)deq(Q2) == 1);
+  assert(*(int*)deq(Q2) == 10);
+  int* num20 = alloc(int);
+  *num15 = 0;
+  int* num21 = alloc(int);
+  *num21 = 9;
+  int* num22 = alloc(int);
+  *num22 = 20;
+  int* num23 = alloc(int);
+  *num23 = 40;
+  int* num24 = alloc(int);
+  *num24 = -1;
+  queue_t Q5 = queue_new();
+  enq(Q5, (void*)num20);
+  enq(Q5, (void*)num21);
+  assert(*(int*)queue_peek(Q5, 0) == 0);
+  assert(*(int*)queue_peek(Q5, 1) == 9);
+  queue_reverse(Q5);
+  assert(*(int*)queue_peek(Q5, 0) == 9);
+  assert(*(int*)queue_peek(Q5, 1) == 0);
+  assert(Q5->size == 2);
+  println("all tests passed");
+
+
+  
+
+
+
+
+
+
+
+  
+  return 0;
+}

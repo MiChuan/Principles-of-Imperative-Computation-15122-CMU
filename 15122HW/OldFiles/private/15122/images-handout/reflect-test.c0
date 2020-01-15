@@ -1,0 +1,43 @@
+// tests for rotate()
+#use <conio>
+#use <util>
+// tests for rotate()
+void test_reflect()
+{
+  pixel_t[] image1 = alloc_array(pixel_t, 2);
+  int width1 = 2;
+  int height1 = 1;
+  for(int i = 0; i < 2; i++)
+    //@loop_invariant 0 <= i && i <= 2;
+    {
+      image1[i] = make_pixel(0xff, i, i, i);
+    }
+
+  pixel_t[] image1_reflected = reflect(image1, width1, height1);
+  pixel_t[] target_image = alloc_array(pixel_t, 8);
+  target_image[0] = make_pixel(0xff, 1, 1, 1);
+  target_image[1] = make_pixel(0xff, 0, 0, 0);
+  target_image[2] = make_pixel(0xff, 0, 0, 0);
+  target_image[3] = make_pixel(0xff, 1, 1, 1);
+
+  target_image[4] = make_pixel(0xff, 1, 1, 1);
+  target_image[5] = make_pixel(0xff, 0, 0, 0);
+  target_image[6] = make_pixel(0xff, 0, 0, 0);
+  target_image[7] = make_pixel(0xff, 1, 1, 1);
+  assert(target_image[0] == image1_reflected[0]);
+  assert(target_image[1] == image1_reflected[1]);
+  assert(target_image[2] == image1_reflected[2]);
+  assert(target_image[3] == image1_reflected[3]);
+  assert(target_image[4] == image1_reflected[4]);
+  assert(target_image[5] == image1_reflected[5]);
+  assert(target_image[6] == image1_reflected[6]);
+  assert(target_image[7] == image1_reflected[7]);
+
+}
+
+int main()
+{
+	test_reflect();
+	println("All tests passed");
+	return 0;
+}

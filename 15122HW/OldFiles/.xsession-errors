@@ -1,0 +1,43 @@
+touch: cannot touch ‘/afs/andrew.cmu.edu/usr6/mxu2/.cache/imsettings/log’: No such file or directory
+generating cookie with syscall
+generating cookie with syscall
+generating cookie with syscall
+generating cookie with syscall
+xfce4-session-Message: 14:57:03.026: SSH authentication agent is already running
+gpg-agent[1719]: directory `/afs/andrew.cmu.edu/usr6/mxu2/.gnupg' created
+gpg-agent[1719]: directory `/afs/andrew.cmu.edu/usr6/mxu2/.gnupg/private-keys-v1.d' created
+gpg-agent[1719]: error binding socket to `/afs/andrew.cmu.edu/usr6/mxu2/.gnupg/S.gpg-agent': Operation not permitted
+
+(xfce4-session:1713): xfce4-session-WARNING **: 14:57:03.083: gpg-agent returned no PID in the variables
+
+(xfce4-session:1713): xfce4-session-WARNING **: 14:57:03.089: xfsm_manager_load_session: Something wrong with /afs/andrew.cmu.edu/usr6/mxu2/.cache/sessions/xfce4-session-ghc79.ghc.andrew.cmu.edu:0, Does it exist? Permissions issue?
+SELinux Troubleshooter: Applet requires SELinux be enabled to run.
+
+(xfwm4:1721): GLib-CRITICAL **: 14:57:04.004: g_str_has_prefix: assertion 'prefix != NULL' failed
+vmware-user: could not open /proc/fs/vmblock/dev
+
+(xfwm4:1721): xfwm4-WARNING **: 14:57:04.123: The property '/general/double_click_distance' of type int is not supported
+
+(xfsettingsd:1733): GLib-CRITICAL **: 14:57:04.980: g_str_has_prefix: assertion 'prefix != NULL' failed
+
+(xfsettingsd:1733): GLib-GObject-CRITICAL **: 14:57:04.981: g_value_get_string: assertion 'G_VALUE_HOLDS_STRING (value)' failed
+
+(xfsettingsd:1733): GLib-GObject-CRITICAL **: 14:57:04.982: g_value_get_string: assertion 'G_VALUE_HOLDS_STRING (value)' failed
+
+(xfwm4:1721): xfwm4-WARNING **: 14:57:07.681: Another compositing manager is running on screen 0
+xfce4-session: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.
+xfdesktop: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+xfwm4: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+Thunar: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+kamsg: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.
+
+(xfsettingsd:1733): libxfce4ui-WARNING **: 15:20:49.852: ICE I/O Error
+
+(xfsettingsd:1733): libxfce4ui-WARNING **: 15:20:49.852: Disconnected from session manager.
+xfsettingsd: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+xfce4-panel: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+wrapper-1.0: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+wrapper-1.0: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+xfce-polkit: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.0.
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":0"
+      after 7 requests (7 known processed) with 1 events remaining.

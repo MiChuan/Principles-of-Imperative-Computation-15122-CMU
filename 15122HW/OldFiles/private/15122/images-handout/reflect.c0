@@ -1,0 +1,152 @@
+/* Assumes that pixel is already defined to be an int (pixel.c0) */
+/* typedef int pixel; */
+#use <util>
+
+// RETURNS: return true iff the two given pixels are equal
+bool pixel_eq(pixel_t p, pixel_t q)
+{
+  return
+    (get_alpha(p) == get_alpha(q)) &&
+    (get_red(p)   == get_red(q))   &&
+    (get_green(p) == get_green(q)) &&
+    (get_blue(p)  == get_blue(q));
+}
+
+// RETURNS: a copy of the given pixel
+pixel_t copy_pixel(pixel_t p)
+//@ensures pixel_eq(\result, p);
+{
+  return make_pixel(get_alpha(p), get_red(p),  get_green(p), get_blue(p));
+}
+
+//RETURNS: the new index of the position of pixel in 
+// reflected image by x axis
+int get_reflected_index_of_x(int i, int width, int height)
+//@requires is_valid_imagesize(width, height);
+//@requires 0 <= i && i < width * height;
+//@ensures 0 <= \result && \result <= width * height;
+{
+  int origin_col = get_column(i, width, height);
+  int origin_row = get_row(i, width, height);
+  int new_col = origin_col;
+  int new_row = height - 1 - origin_row;
+  int changed_index = get_index(new_row, new_col, width, height);
+  return changed_index;
+}
+
+//RETURNS: the new index of the position of pixel in reflected image by y axis
+int get_reflected_index_of_y(int i, int width, int height)
+//@requires is_valid_imagesize(width, height);
+//@requires 0 <= i && i < width * height;
+//@ensures 0 <= \result && \result < width * height;
+{
+  int origin_col = get_column(i, width, height);
+  int origin_row = get_row(i, width, height);
+  int new_col = width - 1 - origin_col;
+  int new_row = origin_row;
+  int changed_index = get_index(new_row, new_col, width, height);
+  return changed_index;
+}
+
+//RETURNS: the new image created by reflect by x axis 
+pixel_t[] reflect_image_by_x(pixel_t[] image, int width, int height)
+//@requires is_valid_imagesize(width, height);
+//@requires \length(image) == width * height;
+//@ensures \result != image;
+//@ensures \length(\result) == \length(image);
+{
+  pixel_t[] image_reflected_by_x = alloc_array(pixel_t, width * height);
+  for(int i = 0; i < width * height; i++) 
+  //@loop_invariant 0 <= i;
+  {
+    int reflected_index = get_reflected_index_of_x(i, width, height);
+    image_reflected_by_x[reflected_index] = copy_pixel(image[i]);
+  }
+  return image_reflected_by_x;
+}
+
+//RETURNS: the new image created by reflect by y axis 
+pixel_t[] reflect_image_by_y(pixel_t[] image, int width, int height)
+//@requires is_valid_imagesize(width, height);
+//@requires \length(image) == width * height;
+//@ensures \result != image;
+//@ensures \length(\result) == \length(image);
+{
+  pixel_t[] image_reflected_by_y = alloc_array(pixel_t, width * height);
+  for(int i = 0; i < width * height; i++) 
+  //@loop_invariant 0 <= i;
+  {
+    int reflected_index = get_reflected_index_of_y(i, width, height);
+    image_reflected_by_y[reflected_index] = copy_pixel(image[i]);
+  }
+  return image_reflected_by_y;
+}
+
+// copy the reflected_image to target image
+void copy_image(pixel_t[] reflected_image, int reflected_image_width, 
+                int reflected_image_height, 
+                pixel_t[] image, int width, int height,
+                int start_row, int start_col)
+//@requires is_valid_imagesize(reflected_image_width, reflected_image_height);
+/*@requires \length(reflected_image) == 
+  @           reflected_image_width * reflected_image_height; @*/
+//@requires is_valid_imagesize(width, height);
+//@requires \length(image) == width * height;
+//@requires 0 <= start_row && 0 <= start_col;
+/*@requires (start_row + reflected_image_height <= height) &&
+            (start_col + reflected_image_width <= width); @*/
+{
+  for (int i = 0; i < reflected_image_height; i++) 
+  //@loop_invariant 0 <= i;
+  {
+    for (int j = 0; j < reflected_image_width; j++) 
+    //@loop_invariant 0 <= j;
+    { 
+      int reflected_image_index = get_index(i, j, reflected_image_width,
+                                            reflected_image_height);
+      int image_index = get_index(start_row + i, start_col + j, width, height);
+      image[image_index] = copy_pixel(reflected_image[reflected_image_index]);
+    }
+  }
+  return;
+}
+
+
+// RETURNS: the final result of reflected image
+pixel_t[] reflect(pixel_t[] pixels, int width, int height)
+//@requires is_valid_imagesize(width, height);
+//@requires \length(pixels) == width * height;
+//@ensures \result != pixels;
+//@ensures \length(\result) == \length(pixels) * 4;
+{
+  int size_width = width * 2;
+  int size_height = height * 2;
+  // create the new empty target image array (2w*2h)
+  pixel_t[] image = alloc_array(pixel_t, size_width * size_height);
+  int row0 = 0;
+  int col0 = width;
+  copy_image(pixels, width, height,
+             image, size_width, size_height, row0, col0);
+  pixel_t[] reflect_by_x_axis = reflect_image_by_x(pixels, width, height);
+  int row1 = height;
+  int col1 = width;
+  copy_image(reflect_by_x_axis, width, height,
+             image, size_width, size_height, row1, col1);
+  pixel_t[] reflect_by_y_axis = reflect_image_by_y(pixels, width, height);
+  int row2 = 0;
+  int col2 = 0;
+  copy_image(reflect_by_y_axis, width, height,
+             image, size_width, size_height, row2, col2);
+  pixel_t[] reflect_by_xy_axis = reflect_image_by_y(reflect_by_x_axis,
+                                                    width, height);
+  int row3 = height;
+  int col3 = 0;
+  copy_image(reflect_by_xy_axis, width, height,
+             image, size_width, size_height, row3, col3);
+  return image;
+}
+
+
+
+
+

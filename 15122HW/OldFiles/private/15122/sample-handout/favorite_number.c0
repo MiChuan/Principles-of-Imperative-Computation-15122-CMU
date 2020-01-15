@@ -1,0 +1,4 @@
+int my_favorite_number() {
+    /* add a line below that returns your favorite number */
+    return 3; // this is *my* favorite number.
+}
